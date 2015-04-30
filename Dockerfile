@@ -8,10 +8,11 @@ VOLUME /mnt/plex_config
 VOLUME /mnt/array1/Public
 VOLUME /mnt/array2/Public
 
+ADD installplex.sh /
+
 RUN ln -s -f /bin/true /usr/bin/chfn && \
 	apt-get -q update && \
 	apt-get install -qy gdebi-core wget && \
-	installplex.sh / && \
 	bash /installplex.sh && \
 	usermod -u 999 plex && \
 	usermod -g 100 plex && \
