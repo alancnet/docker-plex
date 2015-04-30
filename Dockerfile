@@ -9,7 +9,7 @@ VOLUME /mnt/array1/Public
 VOLUME /mnt/array2/Public
 
 ADD installplex.sh /
-ADD plexmediaserver /etc/default/plexmediaserver
+ADD plexmediaserver /default_plexmediaserver
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 ADD plex.sh /etc/service/plex/run
 
@@ -20,7 +20,8 @@ RUN ln -s -f /bin/true /usr/bin/chfn && \
 	usermod -u 999 plex && \
 	usermod -g 100 plex && \
 	chmod +x /etc/my_init.d/firstrun.sh && \
-	chmod +x /etc/service/plex/run
+	chmod +x /etc/service/plex/run && \
+	cat /default_plexmediaserver > /etc/default/plexmediaserver
 
 CMD ["/sbin/my_init"]
 
