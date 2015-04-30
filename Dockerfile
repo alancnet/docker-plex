@@ -9,6 +9,9 @@ VOLUME /mnt/array1/Public
 VOLUME /mnt/array2/Public
 
 ADD installplex.sh /
+ADD plexmediaserver /etc/default/plexmediaserver
+ADD firstrun.sh /etc/my_init.d/firstrun.sh
+ADD plex.sh /etc/service/plex/run
 
 RUN ln -s -f /bin/true /usr/bin/chfn && \
 	apt-get -q update && \
@@ -16,14 +19,7 @@ RUN ln -s -f /bin/true /usr/bin/chfn && \
 	bash /installplex.sh && \
 	usermod -u 999 plex && \
 	usermod -g 100 plex && \
-	mkdir -p /etc/my_init.d && \
-	mkdir /etc/service/plex
-
-ADD plexmediaserver /etc/default/plexmediaserver
-ADD firstrun.sh /etc/my_init.d/firstrun.sh
-ADD plex.sh /etc/service/plex/run
-
-RUN chmod +x /etc/my_init.d/firstrun.sh && \
+	chmod +x /etc/my_init.d/firstrun.sh && \
 	chmod +x /etc/service/plex/run
 
 CMD ["/sbin/my_init"]
