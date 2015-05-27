@@ -29,7 +29,7 @@ else
             apt-get remove --purge -y plexmediaserver
         fi
         echo "Installed to Plex version $PLEX_VERSION"
-        gdebi -n /tmp/plexmediaserver_${PLEX_VERSION}_amd64.deb
+        dpkg -i /tmp/plexmediaserver_${PLEX_VERSION}_amd64.deb
         /etc/init.d/plexmediaserver stop
         # Replace default config with our own
         cat /default_plexmediaserver > /etc/default/plexmediaserver
