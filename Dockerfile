@@ -4,25 +4,17 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV HOME /root
 
-VOLUME /mnt/plex_config
-VOLUME /mnt/array1/Public
-VOLUME /mnt/array2/Public
-
-ADD installplex.sh /
+ADD configure.sh /usr/local/bin/configure
 ADD plexmediaserver /default_plexmediaserver
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 ADD plex.sh /etc/service/plex/run
 
 RUN ln -s -f /bin/true /usr/bin/chfn && \
-	apt-get -q update && \
-	apt-get install -qy gdebi-core wget && \
-	bash /installplex.sh && \
-	usermod -u 999 plex && \
-	usermod -g 100 plex && \
 	chmod +x /etc/my_init.d/firstrun.sh && \
-	chmod +x /etc/service/plex/run && \
-	cat /default_plexmediaserver > /etc/default/plexmediaserver
+	chmod +x /etc/service/plex/run
 
 CMD ["/sbin/my_init"]
 
 EXPOSE 32400
+
+ENTRYPOINT ["/etc/my_init.d/firstrun.sh"]
