@@ -4,7 +4,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV HOME /root
 
-ADD configure.sh /usr/local/bin/configure
 ADD plexmediaserver /default_plexmediaserver
 ADD firstrun.sh /etc/my_init.d/firstrun.sh
 ADD plex.sh /etc/service/plex/run
