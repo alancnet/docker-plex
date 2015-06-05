@@ -30,7 +30,7 @@ else
         fi
         echo "Installed to Plex version $PLEX_VERSION"
         dpkg -i /tmp/plexmediaserver_${PLEX_VERSION}_amd64.deb
-        /etc/init.d/plexmediaserver stop
+        service plexmediaserver stop
         # Replace default config with our own
         cat /default_plexmediaserver > /etc/default/plexmediaserver
         # Fix a Debianism of plex's uid being 101

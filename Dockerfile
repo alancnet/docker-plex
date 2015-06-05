@@ -14,8 +14,6 @@ RUN apt-get update && \
 	chmod +x /etc/my_init.d/firstrun.sh && \
 	chmod +x /etc/service/plex/run
 
-CMD ["/sbin/my_init"]
-
 EXPOSE 32400
 
-ENTRYPOINT ["/etc/my_init.d/firstrun.sh"]
+CMD ["/etc/my_init.d/firstrun.sh"]
