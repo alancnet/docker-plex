@@ -18,7 +18,10 @@ if [ -z "$PLEX_VERSION" ]; then
 fi
 if [ "$PLEX_VERSION" = "$INSTALLED" ]; then
     echo "Version not changed - $PLEX_VERSION"
-    service plexmediaserver stop
+    stop plexmediaserver
+    if [ -f "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid" ]; then
+       rm "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid"
+    fi
     /etc/service/plex/run
 else
     # Don't uninstall the old version of plex if the download fails
@@ -31,7 +34,10 @@ else
         fi
         echo "Installed to Plex version $PLEX_VERSION"
         dpkg -i /tmp/plexmediaserver_${PLEX_VERSION}_amd64.deb
-        service plexmediaserver stop
+        stop plexmediaserver
+        if [ -f "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid" ]; then
+           rm "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid"
+        fi
         # Replace default config with our own
         cat /default_plexmediaserver > /etc/default/plexmediaserver
         # Fix a Debianism of plex's uid being 101
