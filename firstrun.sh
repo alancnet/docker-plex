@@ -22,7 +22,7 @@ if [ "$PLEX_VERSION" = "$INSTALLED" ]; then
     if [ -f "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid" ]; then
        rm "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid"
     fi
-    /etc/service/plex/run
+    /usr/sbin/start_pms
 else
     # Don't uninstall the old version of plex if the download fails
     wget -q "${PLEX_URL}" -O /tmp/plexmediaserver_${PLEX_VERSION}_amd64.deb
@@ -44,7 +44,7 @@ else
         usermod -u 999 plex
         usermod -g 100 plex
         rm -f /tmp/plexmediaserver_${PLEX_VERSION}_amd64.deb
-        /etc/service/plex/run
+        /usr/sbin/start_pms
         echo $PLEX_VERSION > /tmp/version
     else
         echo "Download failed, please try again later"
