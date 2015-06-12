@@ -1,5 +1,7 @@
 FROM ryanckoch/docker-ubuntu-14.04
 
+VOLUME /config
+
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV HOME /root
